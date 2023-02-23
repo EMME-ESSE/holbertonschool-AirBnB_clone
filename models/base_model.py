@@ -38,7 +38,7 @@ class BaseModel:
                 #esto no se como pasarl oa tiempo real, me fije el comando strptime pero no entendi la consigna
                 # y no se si tengo que ponter algo como self.update_at = datetime.strptime(self.update_at, "%Y-%m-%dT%H:%M:%S.%f") 
                 #porque no se si lo que tiene que modificarse es eso o hacer otra variable nueva
-                if key == 'created_at' or key == 'update_at'
+                if key == 'created_at' or key == 'update_at':
                     dateTime = '%Y-%m-%dT %H:%M:%S.%f'
                     value = datetime.strptime(kwargs[key], dateTime)
 
