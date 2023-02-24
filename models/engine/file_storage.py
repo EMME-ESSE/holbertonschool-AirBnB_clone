@@ -34,22 +34,15 @@ class FileStorage:
             for key, value in self.__class__.__objects.items():
                 new_dictionary[key] = value.to_dict()
                 json.dump(new_dictionary, f)    
-
     def reload(self):
-        """Crea una lista de una sola tupla  (class_name, obj_id) a partir de la cadena key usando el método split para despues 
-        separarlas con formato {class_name}.{obj_id}
-        Primer for: comprensión de diccionario.
-        Segundo for: itera a través de todos los elementos del diccionario new_dictionary,
-        Cada llave es una cadena con el formato "<class_name>.<obj_id>", class_name es el nombre de la clase del objeto y obj_id es el 
-        identificador único del objeto.
-        
-        Crea una nueva instancia de la clase y agrega al diccionario __objects utilizando la llave f"{class_name}.{obj_id}". 
-        Si el archivo JSON no existe, se omite la excepción y el diccionario __objects permanece vacío."""
         try:
             with open(FileStorage.__file_path, 'r') as f:
                 new_dictionary = json.load(f)
-                FileStorage.__objects = {f"{class_name}.{obj_id}": eval(class_name)(**value) 
-                                        for key, value in new_dictionary.items()
-                                        for class_name, obj_id in [key.split('.')] }
+                FileStorage.__objects = {}
+            for key, value in new_dictionary.items():
+                class_name, obj_id = key.split('.')
+                obj_instance = eval(class_name)(**value)
+                obj_key = f"{class_name}.{obj_id}"
+                FileStorage.__objects[obj_key] = obj_instance
         except FileNotFoundError:
             pass
