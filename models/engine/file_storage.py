@@ -24,19 +24,32 @@ class FileStorage:
 
     def new(self, obj):
         """ sets in __objects the obj with key <obj class name>.id """
-        key = '{}.{}'.format(obj.__clas__.__name__, str(obj.id))
+        key = '{}.{}'.format(obj.__class__.__name__, str(obj.id))
         self.__clas__.__objects[key] = obj
 
     def save(self):
         """ serializes __objects to the JSON file (path: __file_path) """
         with open(FileStorage.__file_path, 'w+') as f:
             new_dictionary = {}
-            for key, value in self.__clas__.__objects__.items():
+            for key, value in self.__class__.__objects.items():
                 new_dictionary[key] = value.to_dict()
-                f.write(json.dumps(new_dictionary))
+                json.dump(new_dictionary, f)    
 
     def reload(self):
-        """  deserializes the JSON file to __objects """
-        #deserializes the JSON file to __objects (only if the JSON file (__file_path) exists
-
-        #otherwise, do nothing. If the file doesn’t exist, no exception should be raised)
+        """Crea una lista de una sola tupla  (class_name, obj_id) a partir de la cadena key usando el método split para despues 
+        separarlas con formato {class_name}.{obj_id}
+        Primer for: comprensión de diccionario.
+        Segundo for: itera a través de todos los elementos del diccionario new_dictionary,
+        Cada llave es una cadena con el formato "<class_name>.<obj_id>", class_name es el nombre de la clase del objeto y obj_id es el 
+        identificador único del objeto.
+        
+        Crea una nueva instancia de la clase y agrega al diccionario __objects utilizando la llave f"{class_name}.{obj_id}". 
+        Si el archivo JSON no existe, se omite la excepción y el diccionario __objects permanece vacío."""
+        try:
+            with open(FileStorage.__file_path, 'r') as f:
+                new_dictionary = json.load(f)
+                FileStorage.__objects = {f"{class_name}.{obj_id}": eval(class_name)(**value) 
+                                        for key, value in new_dictionary.items()
+                                        for class_name, obj_id in [key.split('.')] }
+        except FileNotFoundError:
+            pass
