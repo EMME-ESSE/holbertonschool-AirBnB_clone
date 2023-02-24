@@ -1,8 +1,7 @@
 #!/usr/bin/python3
-"""
+"""Storage"""
 
 
-"""
 from models.base_model import BaseModel
 from models.amenity import Amenity
 from models.city import City
@@ -16,6 +15,8 @@ import json
 
 class FileStorage:
     """ serializes and deserializes JSON file to instances """
+    __file_path = "file.json"
+    __objects = {}
 
     def all(self):
         """ return dictionary __objects """
