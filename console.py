@@ -24,7 +24,7 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
 
     def EOF(self, args):
-        """ end of file """
+        """ exit with Ctrl + D """
         return True
 
     def quit(self, args):
@@ -34,6 +34,19 @@ class HBNBCommand(cmd.Cmd):
     def emptyLine(self):
         """ empty line """
         pass
+
+    def create(self, args):
+        """ create a new instance """
+        if len(args) == 0:
+            print('** class name missing **')
+        elif line not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+        else:
+            new_instance = eval(args[0])()
+            new_instance = save()
+            prints(instance.id)
+
+
 
 if __name__ == '__main__':
     console = HBNBCommand()
