@@ -22,6 +22,13 @@ class HBNBCommand(cmd.Cmd):
 
     """
     prompt = '(hbnb) '
+    classes = {'BaseModel',
+               'Amenity',
+               'City',
+               'Place',
+               'Review',
+               'State',
+               'User'}
 
     def EOF(self, args):
         """ exit with Ctrl + D """
@@ -37,15 +44,33 @@ class HBNBCommand(cmd.Cmd):
 
     def create(self, args):
         """ create a new instance """
-        if len(args) == 0:
+        token = parse(args)
+
+        if len(token) == 0:
             print('** class name missing **')
-        elif line not in HBNBCommand.classes:
+        elif token[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
         else:
             new_instance = eval(args[0])()
             new_instance = save()
             prints(instance.id)
 
+    def show(self, args):
+        """ prints string of an instance on the class name and id """
+        token = parse(args)
+
+        if len(token) == 0:
+            print('** class name missing **')
+        elif token[0] not in HBNBCommand().classes:
+            print("** class doesn't exist **")
+        elif len(token) == 1:
+            print('** instance id missing **')
+        else:
+            key = '{}.{}'.format(token[0], token[1])
+            if key not in storage.all().keys():
+                print('** no instance found **')
+            else:
+                print(storage.all()[key])
 
 
 if __name__ == '__main__':
