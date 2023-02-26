@@ -90,6 +90,43 @@ class HBNBCommand(cmd.Cmd):
                 del storage.all()[key]
                 storage.save()
 
+    def all(self, args):
+        """ prints string of all instances based or not on the class name """
+        token = parse(args)
+
+        if len(token) == 0:
+            print([str(value) for key, value in storage.all().items()])
+        elif token[0] not in HBNBCommand().classes:
+            print("** class doesn't exist **")
+        else:
+            print([str(value) for key, value in storage.all().items()
+                   if value.__class__.__name__ == token[0]])
+
+    def update(self, args):
+        """ updates instance on the class name and id """
+        token = parse(args)
+
+        if len(token) == 0:
+            print('** class name missing **')
+        elif token[0] not in HBNBCommand().classes:
+            print("** class doesn't exist **")
+        elif len(token) == 1:
+            print('** instance id missing **')
+        else:
+            for key, value in storage.all().items():
+                if (value.__class__.__name__ == token[0]
+                        and value.id == token[1].strip('"')):
+                    if len(token) == 2:
+                        print('** attribute name missing **')
+                    elif len(token) == 3:
+                        print('** value missing **')
+                    else:
+                        setattr(value, token[2], token[3])
+                        storage.save()
+            key = '{}.{}'.format(token[0], token[1])
+            if key not in storage.all().keys():
+                print('** no instance found **')
+
+
 if __name__ == '__main__':
-    console = HBNBCommand()
-    console.cmdloop()
+    HBNBCommand().cmdloop()
