@@ -114,8 +114,8 @@ class HBNBCommand(cmd.Cmd):
             print('** instance id missing **')
         else:
             for key, value in storage.all().items():
-                if (value.__class__.__name__ == token[0]
-                        and value.id == token[1].strip('"')):
+                if (value.__class__.__name__ == token[0] and
+                        value.id == token[1].strip('"')):
                     if len(token) == 2:
                         print('** attribute name missing **')
                     elif len(token) == 3:

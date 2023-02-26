@@ -33,8 +33,10 @@ class FileStorage:
             new_dictionary = {}
             for key, value in self.__class__.__objects.items():
                 new_dictionary[key] = value.to_dict()
-                json.dump(new_dictionary, f)    
+                json.dump(new_dictionary, f)
+
     def reload(self):
+        """ function reload """
         try:
             with open(FileStorage.__file_path, 'r') as f:
                 new_dictionary = json.load(f)
