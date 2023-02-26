@@ -48,7 +48,7 @@ class HBNBCommand(cmd.Cmd):
 
         if len(token) == 0:
             print('** class name missing **')
-        elif token[0] not in HBNBCommand.classes:
+        elif token[0] not in HBNBCommand().classes:
             print("** class doesn't exist **")
         else:
             new_instance = eval(args[0])()
