@@ -35,13 +35,13 @@ class FileStorage:
                 json.dump(new_dictionary, f)
 
     def reload(self):
-        """ function reload """
+        """Function reload"""
         try:
             with open(FileStorage.__file_path, 'r') as f:
-                new_dictionary = json.load(f)
-            for key, value in new_dictionary.items():
-                obj_key = value["__class__"]
-                obj_instance = (obj_key + "(**value)")
-                FileStorage.__objects[key] = obj_instance
+                objects_json = json.load(f)
+                for key, value in objects_json.items():
+                    obj_class = value['__class__']
+                    obj_instance = eval(obj_class + "(**value)")
+                    FileStorage.__objects[key] = obj_instance
         except FileNotFoundError:
             pass
