@@ -19,8 +19,7 @@ class BaseModel:
 
     def __str__(self):
         """Returns a string representation of the instance"""
-        return ("[{}] ({}) {}".format(type(self).__name__,
-                self.id, self.__dict__))
+        return ("[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__))
 
     def save(self):
         """Updates the updated_at attribute with the current datetime."""
@@ -40,10 +39,8 @@ class BaseModel:
         if kwargs:
             kwargs.pop('__class__', None)
             self.__dict__.update(kwargs)
-            self.created_at = datetime.strptime(self.created_at,
-                                                '%Y-%m-%dT%H:%M:%S.%f')
-            self.updated_at = datetime.strptime(self.updated_at,
-                                                '%Y-%m-%dT%H:%M:%S.%f')
+            self.created_at = datetime.strptime(self.created_at,'%Y-%m-%dT%H:%M:%S.%f')
+            self.updated_at = datetime.strptime(self.updated_at,'%Y-%m-%dT%H:%M:%S.%f')
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
