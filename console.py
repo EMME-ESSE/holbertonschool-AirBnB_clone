@@ -51,9 +51,9 @@ class HBNBCommand(cmd.Cmd):
         elif token[0] not in HBNBCommand().classes:
             print("** class doesn't exist **")
         else:
-            new_instance = eval(args[0])()
-            new_instance = save()
-            prints(instance.id)
+            new_instance = eval(token[0])()
+            new_instance.save()
+            print(new_instance.id)
 
     def do_show(self, args):
         """ prints string of an instance on the class name and id """
@@ -128,5 +128,3 @@ class HBNBCommand(cmd.Cmd):
                 print('** no instance found **')
 
 
-if __name__ == '__main__':
-    HBNBCommand().cmdloop()
