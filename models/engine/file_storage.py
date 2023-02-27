@@ -2,6 +2,7 @@
 """Storage"""
 
 
+import json
 from models.base_model import BaseModel
 from models.amenity import Amenity
 from models.city import City
@@ -9,8 +10,6 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
-
-import json
 
 
 class FileStorage:
@@ -41,8 +40,8 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r') as f:
                 new_dictionary = json.load(f)
             for key, value in new_dictionary.items():
-                obj_instance = eval(class_name)(**value)
-                obj_key = f"{class_name}.{obj_id}"
+                obj_key = value["__class__"]
+                obj_instance = eval(obj_key)(**value)
                 FileStorage.__objects[obj_key] = obj_instance
         except FileNotFoundError:
             pass
