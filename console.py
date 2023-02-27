@@ -30,11 +30,11 @@ class HBNBCommand(cmd.Cmd):
                'State',
                'User'}
 
-    def EOF(self, args):
+    def do_EOF(self, args):
         """ exit with Ctrl + D """
         return True
 
-    def quit(self, args):
+    def do_quit(self, args):
         """ quit program """
         return True
 
@@ -42,22 +42,26 @@ class HBNBCommand(cmd.Cmd):
         """ empty line """
         pass
 
-    def create(self, args):
+    def do_create(self, args):
         """ create a new instance """
-        token = parse(args)
+        token = args.split()
 
-        if len(token) == 0:
+        if len(args) == 0:
             print('** class name missing **')
+            return
         elif token[0] not in HBNBCommand().classes:
             print("** class doesn't exist **")
-        else:
-            new_instance = eval(args[0])()
-            new_instance = save()
-            prints(instance.id)
 
-    def show(self, args):
+        try:
+            new_instance = eval(token[0])()
+            new_instance.save()
+            print(new_instance.id)
+        except:
+            print("** class doesn't exist **")
+
+    def do_show(self, args):
         """ prints string of an instance on the class name and id """
-        token = parse(args)
+        token = args.split()
 
         if len(token) == 0:
             print('** class name missing **')
@@ -72,9 +76,9 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print(storage.all()[key])
 
-    def destroy(self, args):
+    def do_destroy(self, args):
         """ delete an instances """
-        token = parse(args)
+        token = args.split()
 
         if len(token) == 0:
             print('** class name missing **')
@@ -90,9 +94,9 @@ class HBNBCommand(cmd.Cmd):
                 del storage.all()[key]
                 storage.save()
 
-    def all(self, args):
+    def do_all(self, args):
         """ prints string of all instances based or not on the class name """
-        token = parse(args)
+        token = args.split()
 
         if len(token) == 0:
             print([str(value) for key, value in storage.all().items()])
@@ -102,9 +106,9 @@ class HBNBCommand(cmd.Cmd):
             print([str(value) for key, value in storage.all().items()
                    if value.__class__.__name__ == token[0]])
 
-    def update(self, args):
+    def do_update(self, args):
         """ updates instance on the class name and id """
-        token = parse(args)
+        token = args.split()
 
         if len(token) == 0:
             print('** class name missing **')
