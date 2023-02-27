@@ -19,7 +19,7 @@ class BaseModel:
     
     def __str__(self):
         """Returns a string representation of the instance"""
-        return ("[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__))
+        return(f"[{type(self).__name__}] ({self.id}) {self.__dict__}")
 
     def save(self):
         """Updates the updated_at attribute with the current datetime."""
@@ -29,7 +29,7 @@ class BaseModel:
     def to_dict(self):
         """Returns a dictionary containing all instance attributes"""
         dict_copy = self.__dict__.copy()
-        dict_copy['__class__'] = type(self).__name__
+        dict_copy['__class__'] = self.__class__.__name__
         dict_copy['created_at'] = self.created_at.isoformat()
         dict_copy['updated_at'] = self.updated_at.isoformat()
         return dict_copy
