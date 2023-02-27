@@ -61,4 +61,4 @@ The back-end system is coded in Python 3:
 ## Contributors
 :small_orange_diamond: Matias Mancini <matimancini@gmail.com>
 
-:small_orange_diamond: Gustavo <Gustavo@gmail.com>
+:small_orange_diamond: Gustavo <gdponcemarsiglia@gmail.com>
