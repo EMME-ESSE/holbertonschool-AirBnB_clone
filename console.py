@@ -44,7 +44,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ create a new instance """
-        token = parse(args)
+        token = args.split()
 
         if len(token) == 0:
             print('** class name missing **')
@@ -57,7 +57,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, args):
         """ prints string of an instance on the class name and id """
-        token = parse(args)
+        token = args.split()
 
         if len(token) == 0:
             print('** class name missing **')
@@ -74,7 +74,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, args):
         """ delete an instances """
-        token = parse(args)
+        token = args.split()
 
         if len(token) == 0:
             print('** class name missing **')
@@ -92,7 +92,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """ prints string of all instances based or not on the class name """
-        token = parse(args)
+        token = args.split()
 
         if len(token) == 0:
             print([str(value) for key, value in storage.all().items()])
@@ -104,7 +104,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, args):
         """ updates instance on the class name and id """
-        token = parse(args)
+        token = args.split()
 
         if len(token) == 0:
             print('** class name missing **')
