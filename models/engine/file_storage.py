@@ -40,9 +40,7 @@ class FileStorage:
         try:
             with open(FileStorage.__file_path, 'r') as f:
                 new_dictionary = json.load(f)
-                FileStorage.__objects = {}
             for key, value in new_dictionary.items():
-                class_name, obj_id = key.split('.')
                 obj_instance = eval(class_name)(**value)
                 obj_key = f"{class_name}.{obj_id}"
                 FileStorage.__objects[obj_key] = obj_instance
