@@ -46,14 +46,18 @@ class HBNBCommand(cmd.Cmd):
         """ create a new instance """
         token = args.split()
 
-        if len(token) == 0:
+        if len(args) == 0:
             print('** class name missing **')
+            return
         elif token[0] not in HBNBCommand().classes:
             print("** class doesn't exist **")
-        else:
+
+        try:
             new_instance = eval(token[0])()
             new_instance.save()
             print(new_instance.id)
+        except:
+            print("** class doesn't exist **")
 
     def do_show(self, args):
         """ prints string of an instance on the class name and id """
@@ -128,3 +132,5 @@ class HBNBCommand(cmd.Cmd):
                 print('** no instance found **')
 
 
+if __name__ == '__main__':
+    HBNBCommand().cmdloop()
