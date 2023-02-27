@@ -2,6 +2,7 @@
 """Storage"""
 
 
+import json
 from models.base_model import BaseModel
 from models.amenity import Amenity
 from models.city import City
@@ -9,8 +10,6 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
-
-import json
 
 
 class FileStorage:
@@ -20,29 +19,30 @@ class FileStorage:
 
     def all(self):
         """ return dictionary __objects """
-        return FileStorage.__objects
+        return self.__objects
 
     def new(self, obj):
         """ sets in __objects the obj with key <obj class name>.id """
-        key = '{}.{}'.format(obj.__class__.__name__, str(obj.id))
-        self.__class__.__objects[key] = obj
+        if obj is not None:
+            key = '{}.{}'.format(obj.__class__.__name__, obj.id)
+            self.__objects[key] = obj
 
     def save(self):
         """ serializes __objects to the JSON file (path: __file_path)"""
-        with open(FileStorage.__file_path, 'w+') as f:
+        with open(self.__file_path, 'w') as f:
             new_dictionary = {}
-            for key, value in self.__class__.__objects.items():
+            for key, value in self.__objects.items():
                 new_dictionary[key] = value.to_dict()
-                json.dump(new_dictionary, f)    
+            json.dump(new_dictionary, f)
+
     def reload(self):
+        """Function reload"""
         try:
             with open(FileStorage.__file_path, 'r') as f:
                 new_dictionary = json.load(f)
-                FileStorage.__objects = {}
-            for key, value in new_dictionary.items():
-                class_name, obj_id = key.split('.')
-                obj_instance = eval(class_name)(**value)
-                obj_key = f"{class_name}.{obj_id}"
-                FileStorage.__objects[obj_key] = obj_instance
+                for key, value in new_dictionary.items():
+                    obj_class = value['__class__']
+                    obj_instance = eval(obj_class + "(**value)")
+                    FileStorage.__objects[key] = obj_instance
         except FileNotFoundError:
             pass
