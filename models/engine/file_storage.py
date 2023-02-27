@@ -19,13 +19,11 @@ class FileStorage:
 
     def all(self):
         """ return dictionary __objects """
-        return FileStorage.__objects
+        return self.__objects
 
     def new(self, obj):
         """ sets in __objects the obj with key <obj class name>.id """
-        if obj is None:
-            pass
-        else:
+        if obj is not None:
             key = '{}.{}'.format(obj.__class__.__name__, obj.id)
             self.__objects[key] = obj
 
