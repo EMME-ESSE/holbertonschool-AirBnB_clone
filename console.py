@@ -3,6 +3,7 @@
 console AirBnB project
 
 """
+import sys
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models import storage
@@ -12,7 +13,6 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
-
 import cmd
 
 
@@ -21,7 +21,12 @@ class HBNBCommand(cmd.Cmd):
     clone console AirBnB
 
     """
-    prompt = '(hbnb) '
+    if sys.stdin and sys.stdin.isatty():
+        prompt = "(hbnb) "
+
+    else:
+        prompt = "(hbnb) \n"
+
     classes = {'BaseModel',
                'Amenity',
                'City',
@@ -29,22 +34,18 @@ class HBNBCommand(cmd.Cmd):
                'Review',
                'State',
                'User'}
-#   
+
     def valid(self, args):
         if args.strip() == "":
             pass
         if args == "":
             pass
-#
+
     def valid(self, args):
         if not args.strip():
             return False
         else:
             return True
-#
-
-
-
 
     def do_EOF(self, args):
         """ exit with Ctrl + D """
