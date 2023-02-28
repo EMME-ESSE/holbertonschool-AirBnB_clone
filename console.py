@@ -31,10 +31,12 @@ class HBNBCommand(cmd.Cmd):
                'User'}
     
     def valid(self, args):
-        if args.strip() == "":
-            pass
-        if args == "":
-            pass
+        if not args.strip():
+            return False
+        else:
+            return True
+
+
 
 
     def do_EOF(self, args):
