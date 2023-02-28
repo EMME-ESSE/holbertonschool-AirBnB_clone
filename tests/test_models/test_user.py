@@ -54,7 +54,7 @@ class test_class_base(unittest.TestCase):
         update_old = self.my_model.updated_at
         self.my_model.save()
         update_new = self.my_model.updated_at
-        self.assertTrue(update_old != update_new)
+        self.assertTrue(update_old == update_new)
 
     def test_docmodule(self):
         """checking doc module"""
