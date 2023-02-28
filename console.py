@@ -29,22 +29,18 @@ class HBNBCommand(cmd.Cmd):
                'Review',
                'State',
                'User'}
-#   
+
     def valid(self, args):
         if args.strip() == "":
             pass
         if args == "":
             pass
-#
+
     def valid(self, args):
         if not args.strip():
             return False
         else:
             return True
-#
-
-
-
 
     def do_EOF(self, args):
         """ exit with Ctrl + D """
