@@ -16,7 +16,7 @@ class BaseModel:
         self.created_at = datetime.datetime.now()
         self.updated_at = datetime.datetime.now()
         models.storage.new(self)
-    
+
     def __str__(self):
         """Returns a string representation of the instance"""
         return(f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}")
@@ -33,11 +33,11 @@ class BaseModel:
         dict_copy['created_at'] = self.created_at.isoformat()
         dict_copy['updated_at'] = self.updated_at.isoformat()
         return dict_copy
-    
+
     def __init__(self, *args, **kwargs):
         """Generate a dictionary representation of an instance"""
         if kwargs is not None and len(kwargs) != 0:
-             for key, value in kwargs.items():
+            for key, value in kwargs.items():
                 if key != "__class__":
                     if key == "created_at" or key == "updated_at":
                         value = datetime.datetime.fromisoformat(value)
