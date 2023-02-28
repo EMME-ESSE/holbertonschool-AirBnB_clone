@@ -1,54 +1,47 @@
 #!/usr/bin/python3
-"""
-testing class User
-"""
+"""Unittests for models/state.py"""
 
+import os
+import models
 import unittest
-from models import state
 from datetime import datetime
+from time import sleep
 from models.state import State
-from models.base_model import BaseModel
 
 
-class test_class_base(unittest.TestCase):
-    """class for testing class User"""
+class TestState_instantiation(unittest.TestCase):
+    """Unittests"""
 
-    @classmethod
-    def setUpClass(self):
-        """set class"""
-        self.my_model = State()
+    def test_no_args_instantiates(self):
+        self.assertEqual(State, type(State()))
 
-    def test_class(self):
-        """ test class """
-        self.assertEqual(State.name, "")
-        self.assertTrue(issubclass(State, BaseModel))
+    def test_new_instance_stored_in_objects(self):
+        self.assertIn(State(), models.storage.all().values())
 
-    def test_create_base(self):
-        """test instance class"""
-        self.assertIsInstance(self.my_model, State)
+    def test_updated_at_is_public_datetime(self):
+        self.assertEqual(datetime, type(State().updated_at))
 
-    def test_attr(self):
-        """test attributes"""
-        self.assertEqual(type(self.my_model.id), str)
-        self.assertEqual(type(self.my_model.created_at), datetime)
-        self.assertEqual(type(self.my_model.updated_at), datetime)
-        self.assertEqual(self.my_model.name, "")
+    def test_created_at_is_public_datetime(self):
+        self.assertEqual(datetime, type(State().created_at))
 
-    def test_update(self):
-        """ test update date """
-        update_old = self.my_model.updated_at
-        self.my_model.save()
-        update_new = self.my_model.updated_at
-        self.assertTrue(update_old == update_new)
+    def test_id_is_public_str(self):
+        self.assertEqual(str, type(State().id))
 
-    def test_docmodule(self):
-        """checking doc module"""
-        self.assertIsNotNone(state.__doc__)
+    def test_two_states_unique_ids(self):
+        st1 = State()
+        st2 = State()
+        self.assertNotEqual(st1.id, st2.id)
 
-    def test_docclass(self):
-        """checking doc class"""
-        self.assertIsNotNone(State.__doc__)
+    def test_two_states_different_updated_at(self):
+        st1 = State()
+        sleep(1)
+        st2 = State()
+        self.assertLess(st1.updated_at, st2.updated_at)
+
+    def test_args_unused(self):
+        st = State(None)
+        self.assertNotIn(None, st.__dict__.values())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
