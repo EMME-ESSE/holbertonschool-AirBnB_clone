@@ -21,7 +21,12 @@ class HBNBCommand(cmd.Cmd):
     clone console AirBnB
 
     """
-    prompt = '(hbnb) '
+    if sys.stdin and sys.stdin.isatty():
+        prompt = "(hbnb) "
+
+    else:
+        prompt = "(hbnb) \n"
+        
     classes = {'BaseModel',
                'Amenity',
                'City',
