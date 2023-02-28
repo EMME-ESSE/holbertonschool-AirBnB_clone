@@ -1,8 +1,9 @@
 #!/usr/bim/python3
 """
 Public class attributes
-
 """
+
+
 from models.base_model import BaseModel
 
 
@@ -10,7 +11,7 @@ class Place(BaseModel):
     """ Place that inherit from BaseModel """
 
     city_id = ''
-    user = ''
+    user_id = ''
     name = ''
     description = ''
     number_rooms = 0
