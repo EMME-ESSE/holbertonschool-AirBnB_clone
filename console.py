@@ -30,6 +30,12 @@ class HBNBCommand(cmd.Cmd):
                'State',
                'User'}
 
+    def valid(self, args):
+        args = args.replace('"', "")
+        if not args.strip():
+            pass
+        return (args)
+      
     def do_EOF(self, args):
         """ exit with Ctrl + D """
         return True
