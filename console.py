@@ -55,7 +55,7 @@ class HBNBCommand(cmd.Cmd):
         """ quit program """
         return True
 
-    def emptyLine(self):
+    def emptyline(self):
         """ empty line """
         pass
 
