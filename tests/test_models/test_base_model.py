@@ -22,11 +22,10 @@ class test_class_base(unittest.TestCase):
         """ set attr """
         self.dict = self.my_model.to_dict()
 
-
     def test_create_base(self):
         """test instance class BaseModel"""
         self.assertIsInstance(self.my_model, BaseModel)
-    
+
     def test_create_kwargs(self):
         """ create class from dictionary """
         self.kwargs = BaseModel(self.dict)
@@ -46,14 +45,13 @@ class test_class_base(unittest.TestCase):
         self.assertEqual(self.dict["my_number"], 89)
         self.assertEqual(self.dict["name"], "My First Model")
 
-
     def test_update(self):
         """ test update date """
         update_old = self.my_model.updated_at
         self.my_model.save()
         update_new = self.my_model.updated_at
         self.assertTrue(update_old == update_new)
-    
+
     def test_to_dict(self):
         """test_to_dict """
         bm = BaseModel()

@@ -21,7 +21,7 @@ class test_class_base(unittest.TestCase):
     def setUp(self):
         """ set attr """
         self.dict = self.my_model.to_dict()
-    
+
     def test_class(self):
         """ test class """
         self.assertEqual(User.email, "")
