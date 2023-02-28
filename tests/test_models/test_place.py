@@ -4,9 +4,9 @@ testing class Review
 """
 
 import unittest
-from models import review
+from models import place
 from datetime import datetime
-from models.review import Review
+from models.place import Place
 from models.base_model import BaseModel
 
 
@@ -16,20 +16,20 @@ class test_class_base(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         """set class"""
-        self.my_model = Review()
+        self.my_model = Place()
 
     def test_docmodule(self):
         """checking doc module"""
-        self.assertIsNotNone(review.__doc__)
+        self.assertIsNotNone(place.__doc__)
 
     def test_docclass(self):
         """checking doc class"""
-        self.assertIsNotNone(Review.__doc__)
+        self.assertIsNotNone(Place.__doc__)
 
     def test_create(self):
         """test instance class"""
-        self.assertIsInstance(self.my_model, Review)
-        self.assertTrue(issubclass(Review, BaseModel), True)
+        self.assertIsInstance(self.my_model, Place)
+        self.assertTrue(issubclass(Place, BaseModel), True)
 
     def test_attr(self):
         """test attributes"""
@@ -39,7 +39,7 @@ class test_class_base(unittest.TestCase):
 
     def test_class(self):
         """ test class """
-        self.assertTrue(issubclass(Review, BaseModel))
+        self.assertTrue(issubclass(Place, BaseModel))
 
 
 if __name__ == "__main__":
