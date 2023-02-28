@@ -6,7 +6,7 @@ class tests
 
 import unittest
 
-from models models.amenity import Amenity
+from models import Amenity
 
 
 class Test_amenity(unittest.TestCase):
@@ -17,8 +17,6 @@ class Test_amenity(unittest.TestCase):
 
     def test_amnity(self):
         """ tests """
-
-
 
 if __name__ == '__name__':
     unittest.main()
