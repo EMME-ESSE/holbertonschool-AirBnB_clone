@@ -1,46 +1,35 @@
 #!/usr/bin/python3
-"""
-testing class Review
-"""
+"""unittests for place"""
 
+import os
+import models
 import unittest
-from models import place
 from datetime import datetime
+from time import sleep
 from models.place import Place
-from models.base_model import BaseModel
 
 
-class test_class_base(unittest.TestCase):
-    """class for testing class Review"""
+class TestPlace_instantiation(unittest.TestCase):
+    """Unittests"""
 
-    @classmethod
-    def setUpClass(self):
-        """set class"""
-        self.my_model = Place()
+    def test_no_args_instantiates(self):
+        self.assertEqual(Place, type(Place()))
 
-    def test_docmodule(self):
-        """checking doc module"""
-        self.assertIsNotNone(place.__doc__)
+    def test_updated_at_is_public_datetime(self):
+        self.assertEqual(datetime, type(Place().updated_at))
 
-    def test_docclass(self):
-        """checking doc class"""
-        self.assertIsNotNone(Place.__doc__)
+    def test_created_at_is_public_datetime(self):
+        self.assertEqual(datetime, type(Place().created_at))
 
-    def test_create(self):
-        """test instance class"""
-        self.assertIsInstance(self.my_model, Place)
-        self.assertTrue(issubclass(Place, BaseModel), True)
+    def test_id_is_public_str(self):
+        self.assertEqual(str, type(Place().id))
 
-    def test_attr(self):
-        """test attributes"""
-        self.assertEqual(type(self.my_model.id), str)
-        self.assertEqual(type(self.my_model.created_at), datetime)
-        self.assertEqual(type(self.my_model.updated_at), datetime)
+    def test_new_instance_stored_in_objects(self):
+        self.assertIn(Place(), models.storage.all().values())
 
-    def test_class(self):
-        """ test class """
+    def test_subclass(self):
         self.assertTrue(issubclass(Place, BaseModel))
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()
