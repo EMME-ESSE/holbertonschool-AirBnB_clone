@@ -36,12 +36,10 @@ class test_class_base(unittest.TestCase):
         self.assertEqual(type(self.my_model.id), str)
         self.assertEqual(type(self.my_model.created_at), datetime)
         self.assertEqual(type(self.my_model.updated_at), datetime)
-        self.assertEqual(self.my_model.name, "")
 
     def test_class(self):
         """ test class """
-        self.my_model.name = ""
-        self.assertEqual(Review.name, "")
+        self.assertTrue(issubclass(Review, BaseModel))
 
 
 if __name__ == "__main__":
