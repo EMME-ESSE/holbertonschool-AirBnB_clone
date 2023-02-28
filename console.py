@@ -31,9 +31,8 @@ class HBNBCommand(cmd.Cmd):
                'User'}
 
     def valid(self, args):
-        args = args.replace('"', "")
         if not args.strip():
-            pass
+            args = args.replace('"', "")
         return (args)
       
     def do_EOF(self, args):
