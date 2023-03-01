@@ -65,5 +65,5 @@ class test_class_base(unittest.TestCase):
         self.assertIsNotNone(User.__doc__)
 
 
-if __main__ == '__name__':
+if __name__ == '__main__':
     unittest.main()

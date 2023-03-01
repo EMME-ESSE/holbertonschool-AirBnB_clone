@@ -7,6 +7,7 @@ import unittest
 from datetime import datetime
 from time import sleep
 from models.place import Place
+from models.base_model import BaseModel
 
 
 class TestPlace_instantiation(unittest.TestCase):
