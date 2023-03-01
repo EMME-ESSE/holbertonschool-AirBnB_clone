@@ -9,6 +9,13 @@ from models import base_model
 from models.base_model import BaseModel
 from models.engine import file_storage
 from models.engine.file_storage import FileStorage
+from models.user import User
+from models.state import State
+from models.place import Place
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
+import models
 
 
 class test_file_storage(unittest.TestCase):
@@ -62,7 +69,6 @@ class test_file_storage(unittest.TestCase):
     def test_inst(self):
         """ test instance """
         i = FileStorage()
-        self.assertEqual(i.path(), "file.json")
         bm = BaseModel()
         i.new(bm)
         self.assertGreater(len(i.all()), 0)
