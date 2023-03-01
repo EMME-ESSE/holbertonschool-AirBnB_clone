@@ -63,3 +63,7 @@ class test_class_base(unittest.TestCase):
     def test_docclass(self):
         """checking doc class"""
         self.assertIsNotNone(User.__doc__)
+
+
+if __main__ == '__name__':
+    unittest.main()

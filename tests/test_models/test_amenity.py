@@ -41,3 +41,6 @@ class test_class_base(unittest.TestCase):
     def test_class(self):
         """ test class """
         self.assertEqual(Amenity.name, "")
+
+if __name__ == '__main__':
+    unittest.main()
