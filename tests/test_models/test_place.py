@@ -1,36 +1,63 @@
 #!/usr/bin/python3
-"""unittests for place"""
+"""
+testing class Place
+"""
 
-import os
-import models
 import unittest
+from models import place
 from datetime import datetime
-from time import sleep
 from models.place import Place
 from models.base_model import BaseModel
 
 
-class TestPlace_instantiation(unittest.TestCase):
-    """Unittests"""
+class test_class_base(unittest.TestCase):
+    """class for testing class place """
 
-    def test_no_args_instantiates(self):
-        self.assertEqual(Place, type(Place()))
+    @classmethod
+    def setUpClass(self):
+        """set class"""
+        self.my_model = Place()
 
-    def test_updated_at_is_public_datetime(self):
-        self.assertEqual(datetime, type(Place().updated_at))
+    def test_docmodule(self):
+        """checking doc module"""
+        self.assertIsNotNone(place.__doc__)
 
-    def test_created_at_is_public_datetime(self):
-        self.assertEqual(datetime, type(Place().created_at))
+    def test_docclass(self):
+        """checking doc class"""
+        self.assertIsNotNone(Place.__doc__)
 
-    def test_id_is_public_str(self):
-        self.assertEqual(str, type(Place().id))
-
-    def test_new_instance_stored_in_objects(self):
-        self.assertIn(Place(), models.storage.all().values())
-
-    def test_subclass(self):
+    def test_create(self):
+        """test instance class"""
+        self.assertIsInstance(self.my_model, Place)
         self.assertTrue(issubclass(Place, BaseModel))
 
+    def test_attr(self):
+        """test attributes"""
+        self.assertEqual(type(self.my_model.id), str)
+        self.assertEqual(type(self.my_model.created_at), datetime)
+        self.assertEqual(type(self.my_model.updated_at), datetime)
+        self.assertEqual(self.my_model.name, "")
+        self.assertEqual(self.my_model.city_id, "")
+        self.assertEqual(self.my_model.user_id, "")
+        self.assertEqual(self.my_model.description, "")
+        self.assertEqual(self.my_model.number_rooms, 0)
+        self.assertEqual(self.my_model.number_bathrooms, 0)
+        self.assertEqual(self.my_model.max_guest, 0)
+        self.assertEqual(self.my_model.price_by_night, 0)
+        self.assertEqual(self.my_model.latitude, 0.0)
+        self.assertEqual(self.my_model.longitude, 0.0)
+        self.assertEqual(self.my_model.amenity_ids, [])
 
-if __name__ == '__main__':
-    unittest.main()
+    def test_class(self):
+        """ test class """
+        self.assertEqual(Place.name, "")
+        self.assertEqual(Place.city_id, "")
+        self.assertEqual(Place.user_id, "")
+        self.assertEqual(Place.description, "")
+        self.assertEqual(Place.number_rooms, 0)
+        self.assertEqual(Place.number_bathrooms, 0)
+        self.assertEqual(Place.max_guest, 0)
+        self.assertEqual(Place.price_by_night, 0)
+        self.assertEqual(Place.latitude, 0.0)
+        self.assertEqual(Place.longitude, 0.0)
+        self.assertEqual(Place.amenity_ids, [])
