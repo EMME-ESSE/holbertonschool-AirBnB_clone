@@ -41,3 +41,6 @@ class TestState_instantiation(unittest.TestCase):
     def test_args_unused(self):
         st = State(None)
         self.assertNotIn(None, st.__dict__.values())
+
+if __name__ == '__main__':
+    unittest.main()
