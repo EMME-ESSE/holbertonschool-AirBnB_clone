@@ -61,19 +61,13 @@ class test_file_storage(unittest.TestCase):
         models.storage.save()
         models.storage.reload()
         objs = FileStorage._FileStorage__objects
-        self.my_model.name = "My_first_model"
-        self.my_model.my_number = 89
-        name = str(self.my_model.__class__.__name__)
-        key = name + "." + str(self.my_model.id)
-        self.my_model.save()
-        self.storage.reload()
-        objs = self.storage.all()
-        self.assertIsNotNone(objs[key])
-        self.obj_reload = objs[key]
-        self.assertTrue(self.my_model.__dict__ == self.obj_reload.__dict__)
-        self.assertTrue(self.my_model is not self.obj_reload)
-        self.assertIsInstance(self.obj_reload, BaseModel)
-        self.assertTrue(self.storage.all(), "My_first_model")
+        self.assertIn("BaseModel." + bm.id, objs)
+        self.assertIn("User." + us.id, objs)
+        self.assertIn("State." + st.id, objs)
+        self.assertIn("Place." + pl.id, objs)
+        self.assertIn("City." + cy.id, objs)
+        self.assertIn("Amenity." + am.id, objs)
+        self.assertIn("Review." + rv.id, objs)
 
     def test_inst(self):
         """ test instance """
