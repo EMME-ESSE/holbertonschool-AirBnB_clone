@@ -9,6 +9,16 @@ from models import base_model
 from models.base_model import BaseModel
 from models.engine import file_storage
 from models.engine.file_storage import FileStorage
+from models.base_model import BaseModel
+from models.engine import file_storage
+from models.engine.file_storage import FileStorage
+from models.user import User
+from models.state import State
+from models.place import Place
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
+import models
 
 
 class test_file_storage(unittest.TestCase):
@@ -33,7 +43,24 @@ class test_file_storage(unittest.TestCase):
             self.assertGreater(len(f.read()), 0)
 
     def test_reload(self):
-        """ test reload from json """
+        """ test reload """
+        bm = BaseModel()
+        us = User()
+        st = State()
+        pl = Place()
+        cy = City()
+        am = Amenity()
+        rv = Review()
+        models.storage.new(bm)
+        models.storage.new(us)
+        models.storage.new(st)
+        models.storage.new(pl)
+        models.storage.new(cy)
+        models.storage.new(am)
+        models.storage.new(rv)
+        models.storage.save()
+        models.storage.reload()
+        objs = FileStorage._FileStorage__objects
         self.my_model.name = "My_first_model"
         self.my_model.my_number = 89
         name = str(self.my_model.__class__.__name__)
