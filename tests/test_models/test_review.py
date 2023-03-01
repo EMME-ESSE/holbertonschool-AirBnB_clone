@@ -29,18 +29,22 @@ class test_class_base(unittest.TestCase):
     def test_create(self):
         """test instance class"""
         self.assertIsInstance(self.my_model, Review)
-        self.assertTrue(issubclass(Review, BaseModel), True)
+        self.assertTrue(issubclass(Review, BaseModel))
 
     def test_attr(self):
         """test attributes"""
         self.assertEqual(type(self.my_model.id), str)
         self.assertEqual(type(self.my_model.created_at), datetime)
         self.assertEqual(type(self.my_model.updated_at), datetime)
+        self.assertEqual(self.my_model.user_id, "")
+        self.assertEqual(self.my_model.place_id, "")
+        self.assertEqual(self.my_model.text, "")
 
     def test_class(self):
         """ test class """
-        self.assertTrue(issubclass(Review, BaseModel))
-
+        self.assertEqual(Review.text, "")
+        self.assertEqual(Review.place_id, "")
+        self.assertEqual(Review.user_id, "")
 
 if __name__ == "__main__":
     unittest.main()
